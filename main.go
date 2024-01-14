@@ -1,55 +1,21 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
 
 	"github.com/manifoldco/promptui"
+	"github.com/mpu69/license-gen/lic"
 )
 
-type License struct {
-	Key     string `json:"key"`
-	Name    string `json:"name"`
-	Spdx_id string `json:"spdx_id"`
-	Url     string `json:"url"`
-	Node_id string `json:"node_id"`
-}
-
 func main() {
-	licenses := getLicenses()
-	parsedLicenses := parseLicenses(licenses)
-	key := selector(parsedLicenses)
-	license := getLicenseByKey(parsedLicenses, key)
-	fmt.Println(license)
+	licenses := lic.GetLicenses()
+	key := selector(licenses)
+	license := lic.GetLicenseByKey(licenses, key)
+	licenseInfo := lic.GetLicenseInfo(license)
+	fmt.Println("Licenseinfo:", licenseInfo)
 }
 
-func getLicenses() []byte {
-	res, err := http.Get("https://api.github.com/licenses")
-	if err != nil {
-		fmt.Println(err)
-		return nil
-	}
-	defer res.Body.Close()
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
-		fmt.Println(err)
-		return nil
-	}
-	return body
-}
-
-func parseLicenses(licenses []byte) []License {
-	var licenseList []License
-	err := json.Unmarshal(licenses, &licenseList)
-	if err != nil {
-		fmt.Println(err)
-	}
-	return licenseList
-}
-
-func selector(parsedLicenses []License) string {
+func selector(parsedLicenses []lic.License) string {
 	var licenses []string
 	for _, license := range parsedLicenses {
 		licenses = append(licenses, license.Spdx_id)
@@ -66,16 +32,4 @@ func selector(parsedLicenses []License) string {
 		return ""
 	}
 	return result
-}
-
-func getLicenseByKey(parsedLicenses []License, key string) License {
-	var license License
-	for _, l := range parsedLicenses {
-		fmt.Println(l.Spdx_id, key)
-		if l.Spdx_id == key {
-			license = l
-			break
-		}
-	}
-	return license
 }
