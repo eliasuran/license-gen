@@ -69,10 +69,13 @@ func selector(parsedLicenses []License) string {
 }
 
 func getLicenseByKey(parsedLicenses []License, key string) License {
-	for _, license := range parsedLicenses {
-		if license.Key == key {
-			return license
+	var license License
+	for _, l := range parsedLicenses {
+		fmt.Println(l.Spdx_id, key)
+		if l.Spdx_id == key {
+			license = l
+			break
 		}
 	}
-	return License{}
+	return license
 }
