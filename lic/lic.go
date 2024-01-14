@@ -62,23 +62,23 @@ func GetLicenseByKey(parsedLicenses []License, key string) License {
 	return license
 }
 
-func GetLicenseInfo(license License) []LicenseInfo {
+func GetLicenseInfo(license License) LicenseInfo {
 	res, err := http.Get("https://api.github.com/licenses/" + license.Key)
 	if err != nil {
 		fmt.Println(err)
-		return nil
+		return LicenseInfo{}
 	}
 	defer res.Body.Close()
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return nil
+		return LicenseInfo{}
 	}
-	var licenseInfo []LicenseInfo
+	var licenseInfo LicenseInfo
 	errr := json.Unmarshal(body, &licenseInfo)
 	if errr != nil {
 		fmt.Println("xo", err)
-		return nil
+		return LicenseInfo{}
 	}
 	return licenseInfo
 }
