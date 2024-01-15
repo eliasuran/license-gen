@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/manifoldco/promptui"
 	"github.com/mpu69/license-gen/lic"
@@ -33,7 +34,7 @@ func selector(parsedLicenses []lic.License) string {
 	_, result, err := prompt.Run()
 	if err != nil {
 		fmt.Println(err)
-		return ""
+		os.Exit(1)
 	}
 	return result
 }

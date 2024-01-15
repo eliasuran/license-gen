@@ -93,7 +93,12 @@ func MakeLicense(license LicenseInfo) {
 		body = strings.ReplaceAll(body, "[fullname]", name)
 		body = strings.ReplaceAll(body, "[year]", year)
 	}
-	fmt.Println(body)
+	err := os.WriteFile("LICENSE", []byte(body), 0644)
+	if err != nil {
+		fmt.Println("Error writing to file: ", err)
+		os.Exit(1)
+	}
+	fmt.Println("License created successfully!")
 }
 
 func getUserDetails() (string, string) {
