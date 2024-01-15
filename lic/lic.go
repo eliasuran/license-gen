@@ -88,7 +88,7 @@ func GetLicenseInfo(license License) LicenseInfo {
 
 func MakeLicense(license LicenseInfo) {
 	body := license.Body
-	if license.Key == "mit" {
+	if license.Key == "mit" || license.Key == "bsd-2-clause" || license.Key == "bsd-3-clause" {
 		name, year := getUserDetails()
 		body = strings.ReplaceAll(body, "[fullname]", name)
 		body = strings.ReplaceAll(body, "[year]", year)
