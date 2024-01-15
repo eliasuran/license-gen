@@ -1,10 +1,13 @@
 package lic
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
+	"os"
+	"strings"
 )
 
 type License struct {
@@ -77,8 +80,28 @@ func GetLicenseInfo(license License) LicenseInfo {
 	var licenseInfo LicenseInfo
 	errr := json.Unmarshal(body, &licenseInfo)
 	if errr != nil {
-		fmt.Println("xo", err)
+		fmt.Println(err)
 		return LicenseInfo{}
 	}
 	return licenseInfo
+}
+
+func MakeLicense(license LicenseInfo) {
+	body := license.Body
+	if license.Key == "mit" {
+		name, year := getUserDetails()
+		body = strings.ReplaceAll(body, "[fullname]", name)
+		body = strings.ReplaceAll(body, "[year]", year)
+	}
+	fmt.Println(body)
+}
+
+func getUserDetails() (string, string) {
+	nameReader := bufio.NewReader(os.Stdin)
+	fmt.Print("Full name: ")
+	name, _ := nameReader.ReadString('\n')
+	yearReader := bufio.NewReader(os.Stdin)
+	fmt.Print("Year: ")
+	year, _ := yearReader.ReadString('\n')
+	return strings.TrimSuffix(name, "\n"), strings.TrimSuffix(year, "\n")
 }

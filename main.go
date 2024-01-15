@@ -9,10 +9,14 @@ import (
 
 func main() {
 	licenses := lic.GetLicenses()
+
 	key := selector(licenses)
+
 	license := lic.GetLicenseByKey(licenses, key)
+
 	licenseInfo := lic.GetLicenseInfo(license)
-	fmt.Println("Licenseinfo:", licenseInfo)
+
+	lic.MakeLicense(licenseInfo)
 }
 
 func selector(parsedLicenses []lic.License) string {
