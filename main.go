@@ -23,7 +23,7 @@ func main() {
 func selector(parsedLicenses []lic.License) string {
 	var licenses []string
 	for _, license := range parsedLicenses {
-		licenses = append(licenses, license.Spdx_id)
+		licenses = append(licenses, license.Name)
 	}
 
 	prompt := promptui.Select{

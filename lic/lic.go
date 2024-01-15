@@ -57,7 +57,7 @@ func GetLicenses() []License {
 func GetLicenseByKey(parsedLicenses []License, key string) License {
 	var license License
 	for _, l := range parsedLicenses {
-		if l.Spdx_id == key {
+		if l.Name == key {
 			license = l
 			break
 		}
