@@ -6,6 +6,12 @@
 
 Generate a license for github project from command line. Built with Go utilizing the github api.
 
+### Usage
+
+```
+go run github.com/eliasuran/license-generator@v1.0.1
+```
+
 ### Installation
 
 #### Manual installation
