@@ -22,7 +22,7 @@ cd license-generator
 go install
 ```
 
-Run the program
+Run the program!
 
 ```
 license-gen
