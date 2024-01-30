@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set Latest Tag
-        uses: eliasuran/actions/latest.yml@master
+        uses: eliasuran/actions/latest@master
