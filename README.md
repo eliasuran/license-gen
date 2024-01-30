@@ -11,8 +11,8 @@ Generate a license for github project from command line. Built with Go utilizing
 #### Manual installation
 
 ```
-git clone https://github.com/eliasuran/license-gen
-cd license-gen
+git clone https://github.com/eliasuran/license-generator
+cd license-generator
 go install
 ```
 
