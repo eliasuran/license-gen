@@ -9,7 +9,7 @@ Generate a license for github project from command line. Built with Go utilizing
 ### Usage
 
 ```
-go run github.com/eliasuran/license-generator@v1.0.1
+go run github.com/eliasuran/license-generator@latest
 ```
 
 ### Installation
