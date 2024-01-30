@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/eliasuran/license-generator/lic"
 	"github.com/manifoldco/promptui"
-	"github.com/mpu69/license-gen/lic"
 )
 
 func main() {

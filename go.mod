@@ -1,4 +1,4 @@
-module github.com/mpu69/license-gen
+module github.com/eliasuran/license-generator
 
 go 1.21.4
 
