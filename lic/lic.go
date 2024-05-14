@@ -89,7 +89,7 @@ func GetLicenseInfo(license License) LicenseInfo {
 func MakeLicense(license LicenseInfo) {
 	body := license.Body
 	if license.Key == "mit" || license.Key == "bsd-2-clause" || license.Key == "bsd-3-clause" {
-		name, year := getUserDetails()
+		name, year := GetUserDetails()
 		body = strings.ReplaceAll(body, "[fullname]", name)
 		body = strings.ReplaceAll(body, "[year]", year)
 	}
@@ -101,7 +101,7 @@ func MakeLicense(license LicenseInfo) {
 	fmt.Println("License created successfully!")
 }
 
-func getUserDetails() (string, string) {
+func GetUserDetails() (string, string) {
 	nameReader := bufio.NewReader(os.Stdin)
 	fmt.Print("Full name: ")
 	name, _ := nameReader.ReadString('\n')
